@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Card from "../Card";
 import { Link } from "react-router-dom";
+import { BreadCrumbs } from "../BreadCrumbs";
 const Beauty = () => {
   const [product, setproduct] = useState([]);
   const [error, SetError] = useState("");
@@ -26,7 +27,8 @@ const Beauty = () => {
   }, []);
 
   return (
-    <div>
+    <div className="px-4 md:px-8 xl:px-20 mt-10">
+      <BreadCrumbs items={[{ label: "Beauty", link: "/beauty" }]} />
       {error && (
         <div className="text-center text-red-500 font-semibold mt-10">
           {error}

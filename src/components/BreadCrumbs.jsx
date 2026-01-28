@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import React from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,7 +9,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-export function BreadCrumbs() {
+export function BreadCrumbs({ items = [] }) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -18,35 +19,20 @@ export function BreadCrumbs() {
           </BreadcrumbLink>
         </BreadcrumbItem>
 
-        <BreadcrumbSeparator />
-
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link to="/docs/decoration">Decoration</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-
-        <BreadcrumbSeparator />
-
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link to="/furniture">Furniture</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-
-        <BreadcrumbSeparator />
-
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link to="/furniture">Storage</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-
-        <BreadcrumbSeparator />
-
-        <BreadcrumbItem>
-          <BreadcrumbPage>Sideboard</BreadcrumbPage>
-        </BreadcrumbItem>
+        {items.map((item, index) => (
+          <React.Fragment key={index}>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              {item.link ? (
+                <BreadcrumbLink asChild>
+                  <Link to={item.link}>{item.label}</Link>
+                </BreadcrumbLink>
+              ) : (
+                <BreadcrumbPage>{item.label}</BreadcrumbPage>
+              )}
+            </BreadcrumbItem>
+          </React.Fragment>
+        ))}
       </BreadcrumbList>
     </Breadcrumb>
   );

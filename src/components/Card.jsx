@@ -11,7 +11,7 @@ const Card = ({ product, id }) => {
         <img
           src={product.images[0]}
           alt={product.title}
-          className="bg-[#F7F5F7] rounded-[18.48px]  h-75 w-full bg-cover bg-center "
+          className="bg-[#F7F5F7] rounded-[18.48px]  sm:h-75 sm:w-full sm:bg-cover sm:bg-center "
         />
         <div className="absolute top-2 right-2 h-11 w-11 bg-[#FCFCFD] rounded-full  flex justify-center items-center">
           {" "}
@@ -20,7 +20,11 @@ const Card = ({ product, id }) => {
       </div>
       <div className="p-5">
         <div className="flex justify-between ">
-          <h4 className=" capitalize text-[#667085]">{product.title}</h4>
+          <h4 className=" capitalize text-[#667085]">
+            {product.title.length > 20
+              ? product.title.slice(0, 20) + "..."
+              : product.title}
+          </h4>
           <p className="text-[18px] font-bold text-[#344054]">
             ${product.price}
           </p>

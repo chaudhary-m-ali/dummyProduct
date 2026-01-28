@@ -4,13 +4,15 @@ import { Handbag } from "lucide-react";
 import { Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Dropdown } from "./Dropdown";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const cartItems = useSelector((state) => state.cart?.items) || [];
   return (
     <div>
       <div className="flex justify-between px-5 lg:px-20 py-5 items-center">
-        <div className="flex  max-[500px]:gap-3 gap-15 items-center">
-          <h1 className="text-[#0D3356] font-extrabold text-[10px] min-[350px]:text-[20px] sm:text-[32.8px]">
+        <div className="flex  gap-6  sm:gap-15 items-center">
+          <h1 className="text-[#0D3356] font-extrabold text-[16px] min-[350px]:text-[20px] sm:text-[32.8px]">
             FashionHub
           </h1>
           <ul className="flex   items-center  gap-2 md:gap-12.5">
@@ -31,10 +33,10 @@ const Navbar = () => {
 
         <div className="flex  gap-5">
           <Link to="/cart">
-            <div className="size-12.5 bg-[#F5F1EE] rounded-full flex justify-center items-center relative ">
+            <div className=" size-10  sm:size-12.5 bg-[#F5F1EE] rounded-full flex justify-center items-center relative ">
               <Handbag color="#875541" />
-              <div className="size-5 rounded-full bg-[#1D364D] flex justify-center items-center absolute top-0 -right-1">
-                <p className="text-white">3</p>
+              <div className="size-4 sm:size-5 rounded-full bg-[#1D364D] flex justify-center items-center absolute top-0 -right-1">
+                <p className="text-white"> {cartItems.length}</p>
               </div>
             </div>
           </Link>

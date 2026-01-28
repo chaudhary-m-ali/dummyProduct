@@ -1,5 +1,6 @@
+import React from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BreadCrumbs } from "./BreadCrumbs";
 import { Heart } from "lucide-react";
@@ -36,16 +37,19 @@ import Description from "./Description";
 import Reviews from "./Reviews";
 import { ReviewForm } from "./ReviewForm";
 import Card from "./Card";
-// import { $ZodCheckEndsWith } from "zod/v4/core";
 import Navbar from "./Navbar";
-// import { set } from "zod";
+import { addToCart } from "@/redux/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
 const ProductDetail = () => {
+  const dispatch = useDispatch();
+  // const { items, tempItems, totalPrice } = useSelector((state) => state.cart);
   const [product, setProduct] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [error, setError] = useState("");
   const [active, setActive] = useState("Description");
   const [activeSize, setActiveSize] = useState("small");
-  const [quantity, SetQuantity] = useState(0);
+  const [quantity, SetQuantity] = useState(1);
   const { id } = useParams();
 
   const getProductDetail = async () => {
@@ -56,9 +60,9 @@ const ProductDetail = () => {
       setProduct(response.data);
       const similarAPI = `https://dummyjson.com/products/category/${response.data.category}`;
       const similarResponse = await axios.get(similarAPI);
-      console.log(similarResponse);
+      console.log("similarResponse", similarResponse);
       const filtered = similarResponse.data.products.filter(
-        (item) => item.id !== response.data.id
+        (item) => item.id !== response.data.id,
       );
       setSimilarProducts(filtered);
     } catch (error) {
@@ -103,8 +107,8 @@ const ProductDetail = () => {
               }}
               // pagination={{ clickable: true }}
               // scrollbar={{ draggable: true }}
-              onSwiper={(swiper) => console.log(swiper)}
-              onSlideChange={() => console.log("slide change")}
+              // onSwiper={(swiper) => console.log(swiper)}
+              // onSlideChange={() => console.log("slide change")}
               className="   sm:w-100 xl:w-150 mt-4"
             >
               <SwiperSlide>
@@ -142,7 +146,19 @@ const ProductDetail = () => {
           </div>
           <div className="right-container flex flex-col items-center  xl:w-150">
             <div className="mt-10">
-              <BreadCrumbs />
+              <BreadCrumbs
+                items={[
+                  {
+                    label:
+                      (product.category &&
+                        product.category.charAt(0).toUpperCase() +
+                          product.category.slice(1)) ||
+                      "Category",
+                    link: `/${product.category}`,
+                  },
+                  { label: product.title || "Product" },
+                ]}
+              />
             </div>
             <div
               id="sideboard"
@@ -219,6 +235,7 @@ const ProductDetail = () => {
                 Choose a Color
               </p>
               <div className="flex gap-1 md:gap-3 items-center">
+                <img src={Group_8} alt="" />
                 <img src={Group_6} alt="" />
                 <img src={Group_7} alt="" className="size-13" />
                 <img src={Group_8} alt="" />
@@ -231,7 +248,7 @@ const ProductDetail = () => {
                 Choose a Size
               </p>
               <div className="flex gap-2 md:gap-3  ">
-                <div className="flex gap-2 rounded-xl px-1 sm:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
+                <div className="flex  gap-1 sm:gap-2 rounded-xl px-1 sm:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
                   <input
                     type="radio"
                     checked={activeSize === "small"}
@@ -239,11 +256,11 @@ const ProductDetail = () => {
                       setActiveSize("small");
                     }}
                   />
-                  <p className=" text-[10px]   md:text-[14px] font-medium text-[#3A4980]">
+                  <p className=" text-[10px]   md:text-[14px] sm:font-medium text-[#3A4980]">
                     Small
                   </p>
                 </div>
-                <div className="flex gap-2 rounded-xl px-1 md:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
+                <div className="flex   gap-1 sm:gap-2 rounded-xl px-1 md:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
                   <input
                     type="radio"
                     checked={activeSize === "medium"}
@@ -251,11 +268,11 @@ const ProductDetail = () => {
                       setActiveSize("medium");
                     }}
                   />
-                  <p className="text-[10px]  md:text-[14px] font-medium text-[#3A4980]">
+                  <p className="text-[10px]  md:text-[14px] sm:font-medium text-[#3A4980]">
                     Medium
                   </p>
                 </div>
-                <div className="flex gap-2 rounded-xl px-1 md:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
+                <div className="flex gap-1 sm:gap-2 rounded-xl px-1 md:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
                   <input
                     type="radio"
                     checked={activeSize === "Large"}
@@ -263,12 +280,12 @@ const ProductDetail = () => {
                       setActiveSize("Large");
                     }}
                   />
-                  <p className="text-[10px]  md:text-[14px] font-medium text-[#3A4980]">
+                  <p className="text-[10px]  md:text-[14px] sm:font-medium text-[#3A4980]">
                     {" "}
                     Large
                   </p>
                 </div>
-                <div className="flex gap-2 rounded-xl px-1  sm:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
+                <div className="flex  gap-1 sm:gap-2 rounded-xl px-1  sm:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
                   <input
                     type="radio"
                     checked={activeSize === "Extra Large"}
@@ -276,11 +293,11 @@ const ProductDetail = () => {
                       setActiveSize("Extra Large");
                     }}
                   />
-                  <p className="text-[10px]  md:text-[14px] font-medium text-[#3A4980]">
+                  <p className="text-[10px]  md:text-[14px] sm:font-medium text-[#3A4980]">
                     Extra Large
                   </p>
                 </div>
-                <div className="flex gap-2 rounded-xl px-1 sm:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
+                <div className="flex gap-1 sm:gap-2 rounded-xl px-1 sm:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
                   <input
                     type="radio"
                     checked={activeSize === "XXL"}
@@ -288,7 +305,7 @@ const ProductDetail = () => {
                       setActiveSize("XXL");
                     }}
                   />
-                  <p className="text-[10px]  sm:text-[14px] font-medium text-[#3A4980]">
+                  <p className="text-[10px]  sm:text-[14px] sm:font-medium text-[#3A4980]">
                     XXL
                   </p>
                 </div>
@@ -297,19 +314,49 @@ const ProductDetail = () => {
             <hr className="w-full h-3 text-[#E4E4E4] mt-7" />
             <div className="flex gap-5">
               <div className="flex rounded-[29.5px] bg-[#F3F3F3] w-25 sm:w-40 justify-between px-4 items-center py-1.75 ">
-                <button className="text-[24px] font-bold text-[#A3A3A3]">
+                <button
+                  onClick={() => SetQuantity(quantity > 1 ? quantity - 1 : 1)}
+                  className="text-[24px] font-bold text-[#A3A3A3] hover:text-[#3A4980] transition-colors"
+                >
                   -
                 </button>
                 <p className="sm:text-[22px] font-bold text-[#3A4980]">
                   {quantity}
                 </p>
-                <button className="text-[24px] font-bold text-[#3A4980]">
+                <button
+                  onClick={() => SetQuantity(quantity + 1)}
+                  className="text-[24px] font-bold text-[#3A4980] hover:text-[#164C96] transition-colors"
+                >
                   +
                 </button>
               </div>
-              <div className="bg-[#3A4980] rounded-[29.5px] flex justify-center w-45 lg:w-75 items-center gap-3  text-white cursor-pointer">
+              <div
+                className="bg-[#3A4980] rounded-[29.5px] px-2 flex justify-center w-35 lg:w-75 items-center gap-3  text-white cursor-pointer hover:bg-[#164C96] transition-colors"
+                onClick={() => {
+                  dispatch(
+                    addToCart({
+                      product: {
+                        id: product.id,
+                        title: product.title,
+                        thumbnail:
+                          product.thumbnail ||
+                          (Array.isArray(product.images)
+                            ? product.images[0]
+                            : product.images),
+                        price: product.price,
+                        category: product.category,
+                      },
+                      quantity,
+                      size: activeSize,
+                    }),
+                  );
+                  toast.success("Added to cart successfully 🛒");
+                }}
+              >
                 <Handbag />
-                <button className="cursor-pointer">Add To Cart</button>
+                <button className="cursor-pointer font-medium sm:font-semibold ">
+                  Add To Cart
+                </button>
               </div>
             </div>
             <div
@@ -527,7 +574,7 @@ const ProductDetail = () => {
                   // install Swiper modules
                   modules={[Navigation, Pagination, Scrollbar, A11y]}
                   spaceBetween={20}
-                  // slidesPerView={4}
+                  // slidesPerView={4}r
                   navigation
                   breakpoints={{
                     0: {
@@ -716,8 +763,8 @@ const ProductDetail = () => {
                 }}
                 // pagination={{ clickable: true }}
                 // scrollbar={{ draggable: true }}
-                onSwiper={(swiper) => console.log(swiper)}
-                onSlideChange={() => console.log("slide change")}
+                // onSwiper={(swiper) => console.log(swiper)}
+                // onSlideChange={() => console.log("slide change")}
                 className=" w-75 sm:w-140 md:w-180 min-[820px]:w-200 lg:w-230  xl:w-7xl mt-4 flex justify-center items-center "
               >
                 {similarProducts.map((item, id) => {

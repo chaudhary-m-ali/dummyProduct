@@ -8,9 +8,11 @@ import Beauty from "./components/Catagories/Beauty";
 import Fragrances from "./components/Catagories/Fragrances";
 import Groceries from "./components/Catagories/Groceries";
 import Furniture from "./components/Catagories/Furniture";
+import { Toaster } from "@/components/ui/sonner";
 const App = () => {
   return (
     <div className="">
+      <Toaster position="top-center" />
       <Navbar />
       <Routes>
         <Route path="/" element={<Products />}></Route>
