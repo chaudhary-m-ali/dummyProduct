@@ -12,9 +12,12 @@ const Navbar = () => {
     <div>
       <div className="flex justify-between px-5 lg:px-20 py-5 items-center">
         <div className="flex  gap-6  sm:gap-15 items-center">
-          <h1 className="text-[#0D3356] font-extrabold text-[16px] min-[350px]:text-[20px] sm:text-[32.8px]">
+          <Link
+            to="/"
+            className="text-[#0D3356] font-extrabold text-[16px] min-[350px]:text-[20px] sm:text-[32.8px]"
+          >
             FashionHub
-          </h1>
+          </Link>
           <ul className="flex   items-center  gap-2 md:gap-12.5">
             <li className=" text-[10px] sm:text-[16px] font-medium text-[#1D364D] hidden sm:block">
               Brand
@@ -37,7 +40,7 @@ const Navbar = () => {
               </div>
             </div>
           </Link>
-          <div className=" hidden size-12.5 bg-[#F5F1EE] rounded-full md:flex justify-center items-center relative">
+          <div className=" hidden size-12.5 bg-[#F5F1EE] rounded-full md:flex justify-center items-center relative cursor-pointer">
             <Bell />
             <div className="size-2.5 rounded-full bg-[#393A45] flex justify-center items-center absolute top-2 -right-1"></div>
           </div>

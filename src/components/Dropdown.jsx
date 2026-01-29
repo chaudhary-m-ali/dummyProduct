@@ -8,11 +8,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 
-export function Dropdown() {
+export function Dropdown({ className }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex justify-center items-center">
+        <Button
+          variant="outline"
+          className={`flex justify-center items-center ${className || ""}`}
+        >
           Categories
         </Button>
       </DropdownMenuTrigger>
