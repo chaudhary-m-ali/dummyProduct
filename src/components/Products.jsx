@@ -6,6 +6,7 @@ import { Handbag } from "lucide-react";
 import { Bell } from "lucide-react";
 import Navbar from "./Navbar";
 import { Search } from "lucide-react";
+import { Dropdown } from "./Dropdown";
 const Products = () => {
   const [product, setProduct] = useState([]);
 
@@ -53,18 +54,21 @@ const Products = () => {
     !error && !loading && product.length === 0 && searchQuery.trim() !== "";
   return (
     <div>
-      <div className="p-5 sm:p-10 flex relative sm:w-96  ">
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          className="w-full sm:w-96 px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-400  "
-        />
-        <Search
-          className="absolute right-10 top-7 sm:right-15 sm:top-12.5"
-          size={20}
-        />
+      <div className="flex gap-3 items-center">
+        <div className="p-5 sm:p-10 flex relative sm:w-96  ">
+          <input
+            type="search"
+            placeholder="Search products..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            className="w-full sm:w-96 px-4 pr-10 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-400    [&::-webkit-search-cancel-button]:cursor-pointer"
+          />
+          <Search
+            className="absolute right-10 top-7 sm:right-15 sm:top-12.5 cursor-pointer"
+            size={20}
+          />
+        </div>
+        <Dropdown className="cursor-pointer " />
       </div>
       {error && (
         <div className="text-center text-red-500 font-semibold mt-10">

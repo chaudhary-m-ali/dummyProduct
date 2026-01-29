@@ -3,7 +3,7 @@ import Rectangle1 from "../assets/Rectangle1.svg";
 import { Handbag } from "lucide-react";
 import { Bell } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Dropdown } from "./Dropdown";
+
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
@@ -16,9 +16,6 @@ const Navbar = () => {
             FashionHub
           </h1>
           <ul className="flex   items-center  gap-2 md:gap-12.5">
-            <li className="  text-[10px]  sm:text-[16px] font-medium text-[#1D364D]">
-              <Dropdown />
-            </li>
             <li className=" text-[10px] sm:text-[16px] font-medium text-[#1D364D] hidden sm:block">
               Brand
             </li>
