@@ -17,6 +17,14 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+.linear {
+  background: linear-gradient(
+    180deg,
+    rgba(244, 232, 243, 1) 0%,
+    rgba(238, 224, 249, 1) 50%,
+    rgba(243, 239, 246, 0.04) 100%
+  );
+}
 
 @keyframes logo-spin {
   from {

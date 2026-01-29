@@ -114,8 +114,10 @@ const Products = () => {
           <button
             key={index}
             onClick={() => setCurrentpage(index + 1)}
-            className={`px-3 py-1 border rounded cursor-pointer hidden sm:block  ${
-              currentpage === index + 1 ? "bg-blue-500 text-white" : ""
+            className={`  px-3 py-1 border rounded cursor-pointer hidden sm:block  ${
+              currentpage === index + 1
+                ? "bg-linear-to-tr from-[#F4E8F3] via-[#F3EFF6] to-[#EEE0F9] text-[#1D364D]"
+                : ""
             }`}
           >
             {index + 1}

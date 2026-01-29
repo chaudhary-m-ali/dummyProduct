@@ -52,6 +52,7 @@ const ProductDetail = () => {
   const [activeSize, setActiveSize] = useState("small");
   const [quantity, SetQuantity] = useState(1);
   const { id } = useParams();
+  const [selectedColor, setSelectedColor] = useState("");
 
   const getProductDetail = async () => {
     try {
@@ -70,6 +71,29 @@ const ProductDetail = () => {
       setError("failed to load data", error);
     }
   };
+
+  // Calculate rating distribution from reviews
+  const calculateRatingDistribution = () => {
+    if (!product.reviews || product.reviews.length === 0) {
+      return [0, 0, 0, 0, 0];
+    }
+
+    const distribution = [0, 0, 0, 0, 0]; // For 5, 4, 3, 2, 1 stars
+    product.reviews.forEach((review) => {
+      const rating = Math.floor(review.rating);
+      if (rating >= 1 && rating <= 5) {
+        distribution[5 - rating]++;
+      }
+    });
+
+    // Convert to percentages
+    const total = product.reviews.length;
+    return distribution.map((count) =>
+      total > 0 ? Math.round((count / total) * 100) : 0,
+    );
+  };
+
+  const ratingDistribution = calculateRatingDistribution();
 
   useEffect(() => {
     getProductDetail();
@@ -148,7 +172,7 @@ const ProductDetail = () => {
           <div className="right-container flex flex-col   xl:w-150">
             <div className="mt-10">
               <BreadCrumbs
-                className="bg-[#EDF0F8] px-2.25 py-1.5 rounded-[6px]"
+                className="bg-[#EDF0F8] px-2.25 py-1.5 rounded-[6px] "
                 items={[
                   {
                     label:
@@ -168,24 +192,24 @@ const ProductDetail = () => {
             >
               <div id="sideboard-left">
                 <h1 className=" text-[10px] sm:text-[28px] font-semibold text-black">
-                  Embrace Sideboards
+                  {product.title}
                 </h1>
                 <p className="text-[#B9BBBF] font-normal text-[10px] sm:text-[16px]">
-                  Teixeira Design Studio
+                  {product.brand}
                 </p>
               </div>
               <div id="sideboard-right" className="flex gap-4 items-start">
-                <div className="bg-[#FFF0F0] flex gap-2  py-1.75 px-2.5 rounded-[10px] ">
-                  <Heart color="#D46F77" />
+                <div className="bg-[#FFF0F0] flex gap-1.75  py-1.75 px-2.5 rounded-[10px] items-center ">
+                  <Heart color="#D46F77" size={20} />
                   <p className="text-[#D46F77] text-[16px] font-semibold  ">
                     109
                   </p>
                 </div>
                 <div className="flex items-center px-2 py-2 bg-[#EDF0F8] rounded-[10px]">
-                  <Bookmark color="#3A4980" />
+                  <Bookmark color="#3A4980" size={20} />
                 </div>
                 <div className="flex items-center px-2 py-2 bg-[#EDF0F8] rounded-[10px]">
-                  <Share2 color="#3A4980" />
+                  <Share2 color="#3A4980" size={20} />
                 </div>
               </div>
             </div>
@@ -193,10 +217,10 @@ const ProductDetail = () => {
             <div id="review" className="flex items-center gap-3 sm:gap-10 ">
               <div id="left">
                 <h2 className="sm:text-[34px] text-[#3A4980] font-bold">
-                  $71.56
+                  ${product.price}
                 </h2>
-                <h4 className="sm:text-[21px] text-black/50 font-normal line-through ">
-                  $71.56
+                <h4 className="sm:text-[21px] text-black/50 font-normal  ">
+                  {product.discountPercentage}%
                 </h4>
               </div>
               <div id="right" className="grid gap-2 sm:gap-4">
@@ -205,7 +229,7 @@ const ProductDetail = () => {
                     id="right-top-left"
                     className="flex px-2.5 py-1.75 gap-2 items-center bg-[#FBF3EA] rounded-[27px]"
                   >
-                    <Star color="#D48D3B" fill="#D48D3B" />
+                    <Star size={16} color="#D48D3B" />
                     <p className="text-[14px] font-semibold text-[#D48D3B] ">
                       {product.rating || "N/A"}
                     </p>
@@ -213,11 +237,11 @@ const ProductDetail = () => {
 
                   <div
                     id="right-top-right"
-                    className="px-2.5 py-1.75 flex gap-2 sm:gap-8 rounded-[27px] bg-[#EDF0F8] items-center"
+                    className="px-2.5 py-1.75 flex gap-1.75 rounded-[27px] bg-[#EDF0F8] items-center"
                   >
-                    <MessageSquareMore color="#3A4980" />
+                    <MessageSquareMore color="#3A4980" size={16} />
                     <p className=" text-[10px] sm:text-[14px] font-semibold text-[#3A4980]">
-                      67 Reviews
+                      {product.reviews?.length || 0} Reviews
                     </p>
                   </div>
                 </div>
@@ -237,11 +261,47 @@ const ProductDetail = () => {
                 Choose a Color
               </p>
               <div className="flex gap-1 md:gap-3 items-center">
-                <img src={Group_8} alt="" />
-                <img src={Group_6} alt="" />
-                <img src={Group_7} alt="" className="size-13" />
-                <img src={Group_8} alt="" />
-                <img src={Rectangle9} alt="" className="size-13" />
+                <div
+                  className={` rounded-full bg-[#ECDECC] cursor-pointer flex items-center justify-center ${selectedColor === "#ECDECC" ? "ring-1 ring-offset-2 ring-[#ECDECC]" : ""}`}
+                  onClick={() => setSelectedColor("#ECDECC")}
+                >
+                  {selectedColor === "#ECDECC" && (
+                    <Check color={"white"} size={24} />
+                  )}
+                </div>
+
+                <div
+                  className={`size-12.5 rounded-full bg-[#BBD278] cursor-pointer flex items-center justify-center ${selectedColor === "#BBD278" ? "p-1 border-2 border-[#3A4980]" : ""}`}
+                  onClick={() => setSelectedColor("#BBD278")}
+                >
+                  {selectedColor === "#BBD278" && (
+                    <Check color={"white"} size={24} />
+                  )}
+                </div>
+                <div
+                  className={`size-12.5 rounded-full bg-[#BBC1F8] cursor-pointer flex items-center justify-center ${selectedColor === "#BBC1F8" ? "p-1 border-2 border-[#3A4980]" : ""}`}
+                  onClick={() => setSelectedColor("#BBC1F8")}
+                >
+                  {selectedColor === "#BBC1F8" && (
+                    <Check color={"white"} size={24} />
+                  )}
+                </div>
+                <div
+                  className={`size-12.5 rounded-full bg-[#FFD3F8] cursor-pointer  flex items-center justify-center ${selectedColor === "#FFD3F8" ? "p-1 border-2 border-[#3A4980]" : ""}`}
+                  onClick={() => setSelectedColor("#FFD3F8")}
+                >
+                  {selectedColor === "#FFD3F8" && (
+                    <Check color={"white"} size={24} />
+                  )}
+                </div>
+                <div
+                  className={`size-12.5 rounded-full bg-linear-to-b from-[#FFB6B6] to-[#98C185] flex items-center justify-center ${selectedColor === "#FFB6B6" ? "p-1 border-2 border-[#3A4980]" : ""}`}
+                  onClick={() => setSelectedColor("#FFB6B6")}
+                >
+                  {selectedColor === "#FFB6B6" && (
+                    <Check color={"white"} size={24} />
+                  )}
+                </div>
               </div>
             </div>
             <hr className="w-full h-3 text-[#E4E4E4] mt-7" />
@@ -318,7 +378,7 @@ const ProductDetail = () => {
               <div className="flex rounded-[29.5px] bg-[#F3F3F3] w-25 sm:w-40 justify-between px-4 items-center py-1.75 ">
                 <button
                   onClick={() => SetQuantity(quantity > 1 ? quantity - 1 : 1)}
-                  className="text-[24px] font-bold text-[#A3A3A3] hover:text-[#3A4980] transition-colors"
+                  className="text-[24px] font-bold text-[#A3A3A3] hover:text-[#3A4980] transition-colors cursor-pointer"
                 >
                   -
                 </button>
@@ -327,7 +387,7 @@ const ProductDetail = () => {
                 </p>
                 <button
                   onClick={() => SetQuantity(quantity + 1)}
-                  className="text-[24px] font-bold text-[#3A4980] hover:text-[#164C96] transition-colors"
+                  className="text-[24px] font-bold text-[#3A4980] hover:text-[#164C96] transition-colors cursor-pointer"
                 >
                   +
                 </button>
@@ -372,7 +432,7 @@ const ProductDetail = () => {
                     Free Delivery
                   </h3>
                   <p className="text-[14px] font-normal text-[#726C6C] underline ">
-                    Enter your Postal code for Delivery Availability
+                    {product.shippingInformation}
                   </p>
                 </div>
               </div>
@@ -384,7 +444,7 @@ const ProductDetail = () => {
                     Return Delivery
                   </h3>
                   <p className="text-[14px] text-[#726C6C] font-normal ">
-                    Free 30 days Delivery{" "}
+                    {product.returnPolicy}
                     <span className="underline"> Details</span>
                   </p>
                 </div>
@@ -618,109 +678,95 @@ const ProductDetail = () => {
           </h4>
           <div className="flex gap-20 p-5">
             <div className="feedback-left ">
-              <h1 className="text-[#164C96] font-bold text-[60px]">4.8</h1>
-              <img src={Star1} alt="" />
+              <h1 className="text-[#164C96] font-bold text-[60px]">
+                {product.rating || "N/A"}
+              </h1>
+              <StarRating
+                rating={product.rating || 0}
+                size={20}
+                showRating={false}
+              />
               <p className="text-[16px] font-normal text-[#4F547B] mt-2 sm:mt-4">
                 Product Rating
               </p>
             </div>
-            <div className="feedback-right p-5 grid gap-2">
-              <div className="flex gap-4">
-                <img src={r1} alt="" />
-                <p className="text-[16px] font-normal text-[#164C96]">70%</p>
-              </div>
-              <div className="flex gap-4">
-                <img src={r2} alt="" />
-                <p className="text-[16px] font-normal text-[#164C96]">15%</p>
-              </div>
-              <div className="flex gap-4">
-                <img src={r3} alt="" />
-                <p className="text-[16px] font-normal text-[#164C96]">10%</p>
-              </div>
-              <div className="flex gap-4">
-                <img src={r4} alt="" />
-                <p className="text-[16px] font-normal text-[#164C96]">3%</p>
-              </div>
-              <div className="flex gap-4">
-                <img src={r5} alt="" />
-                <p className="text-[16px] font-normal text-[#164C96]">2%</p>
-              </div>
+
+            <div className="feedback-right flex-1 grid gap-4">
+              {[5, 4, 3, 2, 1].map((starCount, index) => (
+                <div key={starCount} className="flex gap-4 items-center">
+                  <div className="flex-1 bg-[#F0F2F5] rounded-full h-2">
+                    <div
+                      className="bg-[#2E7D32] h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${ratingDistribution[index]}%` }}
+                    ></div>
+                  </div>
+                  <div className="flex items-center gap-0.5 min-w-[80px]">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        size={14}
+                        fill={i < starCount ? "#F59E0B" : "#E5E7EB"}
+                        color={i < starCount ? "#F59E0B" : "#E5E7EB"}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-[14px] font-semibold text-[#164C96] w-10">
+                    {ratingDistribution[index]}%
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
           <h4 className="text-[#344054] text-[24px] font-bold">Reviews</h4>
           <div>
             <div id="1" className="mt-5">
-              <div id="review-1" className="flex items-start gap-6">
-                <img src={profile} alt="" />
-                <div id="info" className="grid gap-2 sm:gap-4">
-                  <div id="head" className="grid gap-1.25">
-                    <div className="flex gap-2 items-center">
-                      <h4 className="text-[17px] font-medium text-[#1D2939]">
-                        Nicolas cage
-                      </h4>
-                      <p className="text-[13px] font-normal text-[#4F547B]">
-                        3 Days ago
-                      </p>
+              {product.reviews && product.reviews.length > 0 ? (
+                product.reviews.map((review, index) => (
+                  <div key={`${review.reviewerEmail}-${index}`}>
+                    <div className="flex items-start gap-6">
+                      <img src={profile} alt="" />
+                      <div id="info" className="grid gap-2 sm:gap-4">
+                        <div id="head" className="grid gap-1.25">
+                          <div className="flex gap-2 items-center">
+                            <h4 className="text-[17px] font-medium text-[#1D2939]">
+                              {review.reviewerName}
+                            </h4>
+                            <p className="text-[13px] font-normal text-[#4F547B]">
+                              {new Date(review.date).toLocaleDateString()}
+                            </p>
+                          </div>
+                          <StarRating
+                            rating={review.rating}
+                            size={14}
+                            showRating={false}
+                          />
+                        </div>
+                        <p className="text-[15px] font-normal text-[#667085]">
+                          {review.comment}
+                        </p>
+                        <div id="helpful-btn" className="flex gap-2 sm:gap-4">
+                          <div className="flex gap-1.25 items-center">
+                            <ThumbsUp color="#667085" size={14} />
+                            <p className="text-[13px] font-normal text-[#667085]">
+                              Like
+                            </p>
+                          </div>
+                          <button className="text-[13px] font-normal text-[#D94A27] cursor-pointer">
+                            Reply
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    <img src={Star1} alt="rating" className="h-2.75" />
+                    {index < product.reviews.length - 1 && (
+                      <hr className="h-px w-full bg-[#EDEDED] my-10 " />
+                    )}
                   </div>
-                  <h4 className="text-[15px] font-normal text-[#1D2939]">
-                    Greate Product
-                  </h4>
-                  <p className="text-[15px] font-normal text-[#667085]">
-                    There are many variations of passages of Lorem Ipsum
-                    available, but the majority have suffered alteration in some
-                    form, by injected humour
-                  </p>
-                  <div id="helpful-btn" className="flex gap-2 sm:gap-4">
-                    <div className="flex gap-1.25 items-center">
-                      <ThumbsUp color="#667085" size={14} />
-                      <p className="text-[13px] font-normal text-[#667085]">
-                        Like
-                      </p>
-                    </div>
-                    <button className="text-[13px] font-normal text-[#D94A27] cursor-pointer">
-                      Replay
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <hr className="h-px w-full bg-[#EDEDED] my-10 " />
-              <div id="review-2" className="flex items-start gap-6">
-                <img src={profile} alt="" />
-                <div id="info" className="grid gap-4">
-                  <div id="head" className="grid gap-1.25">
-                    <div className="flex gap-2 items-center">
-                      <h4 className="text-[17px] font-medium text-[#1D2939]">
-                        Sr.Robert Downey
-                      </h4>
-                      <p className="text-[13px] font-normal text-[#4F547B]">
-                        3 Days ago
-                      </p>
-                    </div>
-                    <img src={Star1} alt="rating" height={11} />
-                  </div>
-                  <h4 className="text-[15px] font-normal text-[#1D2939]">
-                    The best product In Market
-                  </h4>
-                  <p className="text-[15px] font-normal text-[#667085]">
-                    Contrary to popular belief, Lorem Ipsum is not simply random
-                    text. It has roots in a piece of classical Latin literature
-                    from 45 BC, making it over 2000 years old.
-                  </p>
-                  <div id="helpful-btn" className="flex gap-4">
-                    <div className="flex gap-1.25 items-center">
-                      <ThumbsUp color="#667085" size={14} />
-                      <p className="text-[13px] font-normal text-[#667085]">
-                        Like
-                      </p>
-                    </div>
-                    <button className="text-[13px] font-normal text-[#D94A27] cursor-pointer">
-                      Replay
-                    </button>
-                  </div>
-                </div>
-              </div>
+                ))
+              ) : (
+                <p className="text-gray-500 text-center py-10">
+                  No reviews yet
+                </p>
+              )}
             </div>
             <div id="2" className="flex justify-center items-center my-10">
               <button className="text-[16px] font-normal text-[#D94A27]">

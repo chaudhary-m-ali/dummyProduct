@@ -14,21 +14,26 @@ export function BreadCrumbs({ items = [], className }) {
     <Breadcrumb className={`${className || ""}`}>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink asChild>
+          <BreadcrumbLink
+            asChild
+            className="text-[#A3A9C2] hover:text-[#3A4980]"
+          >
             <Link to="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         {items.map((item, index) => (
           <React.Fragment key={index}>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
+            <BreadcrumbSeparator className="text-[#A3A9C2]" />
+            <BreadcrumbItem className="text-[#A3A9C2] hover:text-[#3A4980]">
               {item.link ? (
-                <BreadcrumbLink asChild>
+                <BreadcrumbLink asChild className="hover:text-[#3A4980]">
                   <Link to={item.link}>{item.label}</Link>
                 </BreadcrumbLink>
               ) : (
-                <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                <BreadcrumbPage className="text-[#3A4980] font-semibold">
+                  {item.label}
+                </BreadcrumbPage>
               )}
             </BreadcrumbItem>
           </React.Fragment>
