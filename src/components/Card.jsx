@@ -1,6 +1,7 @@
 import React from "react";
 import frame_10 from "../assets/frame10.svg";
 import { Heart } from "lucide-react";
+import StarRating from "./StarRating";
 const Card = ({ product, id }) => {
   return (
     <div
@@ -31,7 +32,7 @@ const Card = ({ product, id }) => {
         </div>
         <p className="text-[#98A2B3]">{product.availabilityStatus}</p>
         <div className="flex gap-2 mt-3">
-          <img src={frame_10} alt="" />
+          <StarRating rating={product.rating} size={16} showRating={false} />
           <p className="text-[#98A2B3]">({product.rating})</p>
         </div>
         <div className="flex justify-between mt-3">

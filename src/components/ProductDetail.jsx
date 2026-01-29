@@ -41,6 +41,7 @@ import Navbar from "./Navbar";
 import { addToCart } from "@/redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
+import StarRating from "./StarRating";
 const ProductDetail = () => {
   const dispatch = useDispatch();
   // const { items, tempItems, totalPrice } = useSelector((state) => state.cart);
@@ -144,9 +145,10 @@ const ProductDetail = () => {
               </SwiperSlide>
             </Swiper>
           </div>
-          <div className="right-container flex flex-col items-center  xl:w-150">
+          <div className="right-container flex flex-col   xl:w-150">
             <div className="mt-10">
               <BreadCrumbs
+                className="bg-[#EDF0F8] px-2.25 py-1.5 rounded-[6px]"
                 items={[
                   {
                     label:
@@ -203,9 +205,9 @@ const ProductDetail = () => {
                     id="right-top-left"
                     className="flex px-2.5 py-1.75 gap-2 items-center bg-[#FBF3EA] rounded-[27px]"
                   >
-                    <Star color="#D48D3B" />
+                    <Star color="#D48D3B" fill="#D48D3B" />
                     <p className="text-[14px] font-semibold text-[#D48D3B] ">
-                      4.8
+                      {product.rating || "N/A"}
                     </p>
                   </div>
 

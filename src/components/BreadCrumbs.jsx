@@ -9,9 +9,9 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-export function BreadCrumbs({ items = [] }) {
+export function BreadCrumbs({ items = [], className }) {
   return (
-    <Breadcrumb>
+    <Breadcrumb className={`${className || ""}`}>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
