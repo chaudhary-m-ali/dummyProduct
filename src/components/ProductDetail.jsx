@@ -110,7 +110,7 @@ const ProductDetail = () => {
         >
           <div id="left-container" className="">
             <img
-              className="  xl:w-150 rounded-[17px] border   "
+              className="  xl:w-150 rounded-[17px] border"
               src={product.images}
               alt="product.title"
             />
@@ -182,7 +182,7 @@ const ProductDetail = () => {
             </div>
           </div>
           <div className="right-container flex flex-col   xl:w-150">
-            <div className="mt-10">
+            <div>
               <BreadCrumbs
                 className="bg-[#EDF0F8] px-2.25 py-1.5 rounded-[6px] "
                 items={[
@@ -274,44 +274,64 @@ const ProductDetail = () => {
               </p>
               <div className="flex gap-1 md:gap-3 items-center">
                 <div
-                  className={` rounded-full bg-[#ECDECC] cursor-pointer flex items-center justify-center ${selectedColor === "#ECDECC" ? "ring-1 ring-offset-2 ring-[#ECDECC]" : ""}`}
+                  className={`size-12.5 rounded-full bg-[#ECDECC] cursor-pointer flex items-center justify-center ${
+                    selectedColor === "#ECDECC"
+                      ? "ring-4 ring-offset-4 ring-[#ECDECC]"
+                      : ""
+                  }`}
                   onClick={() => setSelectedColor("#ECDECC")}
                 >
                   {selectedColor === "#ECDECC" && (
-                    <Check color={"white"} size={24} />
+                    <Check color={"white"} size={24} strokeWidth={3} />
                   )}
                 </div>
 
                 <div
-                  className={`size-12.5 rounded-full bg-[#BBD278] cursor-pointer flex items-center justify-center ${selectedColor === "#BBD278" ? "p-1 border-2 border-[#3A4980]" : ""}`}
+                  className={`size-12.5 rounded-full bg-[#BBD278] cursor-pointer flex items-center justify-center ${
+                    selectedColor === "#BBD278"
+                      ? "ring-4 ring-offset-4 ring-[#BBD278]"
+                      : ""
+                  }`}
                   onClick={() => setSelectedColor("#BBD278")}
                 >
                   {selectedColor === "#BBD278" && (
-                    <Check color={"white"} size={24} />
+                    <Check color={"white"} size={24} strokeWidth={3} />
                   )}
                 </div>
                 <div
-                  className={`size-12.5 rounded-full bg-[#BBC1F8] cursor-pointer flex items-center justify-center ${selectedColor === "#BBC1F8" ? "p-1 border-2 border-[#3A4980]" : ""}`}
+                  className={`size-12.5 rounded-full bg-[#BBC1F8] cursor-pointer flex items-center justify-center ${
+                    selectedColor === "#BBC1F8"
+                      ? "ring-4 ring-offset-4 ring-[#BBC1F8]"
+                      : ""
+                  }`}
                   onClick={() => setSelectedColor("#BBC1F8")}
                 >
                   {selectedColor === "#BBC1F8" && (
-                    <Check color={"white"} size={24} />
+                    <Check color={"white"} size={24} strokeWidth={3} />
                   )}
                 </div>
                 <div
-                  className={`size-12.5 rounded-full bg-[#FFD3F8] cursor-pointer  flex items-center justify-center ${selectedColor === "#FFD3F8" ? "p-1 border-2 border-[#3A4980]" : ""}`}
+                  className={`size-12.5 rounded-full bg-[#FFD3F8] cursor-pointer  flex items-center justify-center ${
+                    selectedColor === "#FFD3F8"
+                      ? "ring-4 ring-offset-4 ring-[#FFD3F8]"
+                      : ""
+                  }`}
                   onClick={() => setSelectedColor("#FFD3F8")}
                 >
                   {selectedColor === "#FFD3F8" && (
-                    <Check color={"white"} size={24} />
+                    <Check color={"white"} size={24} strokeWidth={3} />
                   )}
                 </div>
                 <div
-                  className={`size-12.5 rounded-full bg-linear-to-b from-[#FFB6B6] to-[#98C185] flex items-center justify-center ${selectedColor === "#FFB6B6" ? "p-1 border-2 border-[#3A4980]" : ""}`}
+                  className={`size-12.5 rounded-full bg-linear-to-b from-[#FFB6B6] to-[#98C185] flex items-center justify-center ${
+                    selectedColor === "#FFB6B6"
+                      ? "ring-4 ring-offset-4 ring-[#FFB6B6]"
+                      : ""
+                  }`}
                   onClick={() => setSelectedColor("#FFB6B6")}
                 >
                   {selectedColor === "#FFB6B6" && (
-                    <Check color={"white"} size={24} />
+                    <Check color={"white"} size={24} strokeWidth={3} />
                   )}
                 </div>
               </div>
@@ -322,62 +342,77 @@ const ProductDetail = () => {
                 Choose a Size
               </p>
               <div className="flex gap-2 md:gap-3  ">
-                <div className="flex  gap-1 sm:gap-2 rounded-xl px-1 sm:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
+                <div
+                  className="flex  gap-1 sm:gap-2 rounded-[8px] px-1 sm:px-2.5 sm:py-1.75 bg-[#EDF0F8] cursor-pointer "
+                  onClick={() => {
+                    setActiveSize("small");
+                  }}
+                >
                   <input
                     type="radio"
                     checked={activeSize === "small"}
-                    onChange={() => {
-                      setActiveSize("small");
-                    }}
+                    className="cursor-pointer accent-[#3A4980]"
                   />
                   <p className=" text-[10px]   md:text-[14px] sm:font-medium text-[#3A4980]">
                     Small
                   </p>
                 </div>
-                <div className="flex   gap-1 sm:gap-2 rounded-xl px-1 md:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
+                <div
+                  className="flex   gap-1 sm:gap-2 rounded-[8px] px-1 md:px-2.5 sm:py-1.75 bg-[#EDF0F8] cursor-pointer "
+                  onClick={() => {
+                    setActiveSize("medium");
+                  }}
+                >
                   <input
                     type="radio"
                     checked={activeSize === "medium"}
-                    onChange={() => {
-                      setActiveSize("medium");
-                    }}
+                    className="cursor-pointer accent-[#3A4980]"
                   />
                   <p className="text-[10px]  md:text-[14px] sm:font-medium text-[#3A4980]">
                     Medium
                   </p>
                 </div>
-                <div className="flex gap-1 sm:gap-2 rounded-xl px-1 md:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
+                <div
+                  className="flex gap-1 sm:gap-2 rounded-[8px] px-1 md:px-2.5 sm:py-1.75 bg-[#EDF0F8] cursor-pointer "
+                  onClick={() => {
+                    setActiveSize("Large");
+                  }}
+                >
                   <input
                     type="radio"
                     checked={activeSize === "Large"}
-                    onChange={() => {
-                      setActiveSize("Large");
-                    }}
+                    className="cursor-pointer accent-[#3A4980]"
                   />
                   <p className="text-[10px]  md:text-[14px] sm:font-medium text-[#3A4980]">
                     {" "}
                     Large
                   </p>
                 </div>
-                <div className="flex  gap-1 sm:gap-2 rounded-xl px-1  sm:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
+                <div
+                  className="flex  gap-1 sm:gap-2 rounded-[8px] px-1  sm:px-2.5 sm:py-1.75 bg-[#EDF0F8] cursor-pointer "
+                  onClick={() => {
+                    setActiveSize("Extra Large");
+                  }}
+                >
                   <input
                     type="radio"
                     checked={activeSize === "Extra Large"}
-                    onChange={() => {
-                      setActiveSize("Extra Large");
-                    }}
+                    className="cursor-pointer accent-[#3A4980]"
                   />
                   <p className="text-[10px]  md:text-[14px] sm:font-medium text-[#3A4980]">
                     Extra Large
                   </p>
                 </div>
-                <div className="flex gap-1 sm:gap-2 rounded-xl px-1 sm:px-2.5 sm:py-1.75 bg-[#EDF0F8] ">
+                <div
+                  className="flex gap-1 sm:gap-2 rounded-[8px] px-1 sm:px-2.5 sm:py-1.75 bg-[#EDF0F8] cursor-pointer "
+                  onClick={() => {
+                    setActiveSize("XXL");
+                  }}
+                >
                   <input
                     type="radio"
                     checked={activeSize === "XXL"}
-                    onChange={() => {
-                      setActiveSize("XXL");
-                    }}
+                    className="cursor-pointer  accent-[#3A4980]"
                   />
                   <p className="text-[10px]  sm:text-[14px] sm:font-medium text-[#3A4980]">
                     XXL
@@ -644,10 +679,10 @@ const ProductDetail = () => {
                 Similar Items You Might Also Like
               </h4>
               <div className="relative group w-75 sm:w-140 md:w-180 min-[820px]:w-200 lg:w-230 xl:w-7xl mt-4 mx-auto flex justify-center items-center">
-                <button className="similar-items-desc-prev absolute -left-6 top-1/2 -translate-y-1/2 z-10 size-11 flex items-center justify-center bg-white rounded-full border border-[#E4E7EC] shadow-sm hover:bg-gray-50 cursor-pointer disabled:opacity-50">
+                <button className="similar-items-desc-prev absolute -left-6 top-1/3  z-10 size-11 flex items-center justify-center bg-white rounded-full border border-[#E4E7EC] shadow-sm hover:bg-gray-50 cursor-pointer disabled:opacity-50">
                   <ChevronLeft size={24} color="#1D2939" strokeWidth={1.5} />
                 </button>
-                <button className="similar-items-desc-next absolute -right-6 top-1/2 -translate-y-1/2 z-10 size-11 flex items-center justify-center bg-white rounded-full border border-[#E4E7EC] shadow-sm hover:bg-gray-50 cursor-pointer disabled:opacity-50">
+                <button className="similar-items-desc-next absolute -right-6 top-1/3  z-10 size-11 flex items-center justify-center bg-white rounded-full border border-[#E4E7EC] shadow-sm hover:bg-gray-50 cursor-pointer disabled:opacity-50">
                   <ChevronRight size={24} color="#1D2939" strokeWidth={1.5} />
                 </button>
                 <Swiper
@@ -811,10 +846,10 @@ const ProductDetail = () => {
                 Similar Items You Might Also Like
               </h4>
               <div className="relative group w-75 sm:w-140 md:w-180 min-[820px]:w-200 lg:w-230 xl:w-7xl mt-4 mx-auto flex justify-center items-center">
-                <button className="similar-items-prev absolute -left-6 top-1/2 -translate-y-1/2 z-10 size-11 flex items-center justify-center bg-white rounded-full border border-[#E4E7EC] shadow-sm hover:bg-gray-50 cursor-pointer disabled:opacity-50">
+                <button className="similar-items-prev absolute -left-6 top-1/3  z-10 size-11 flex items-center justify-center bg-white rounded-full border border-[#E4E7EC] shadow-sm hover:bg-gray-50 cursor-pointer disabled:opacity-50">
                   <ChevronLeft size={24} color="#1D2939" strokeWidth={1.5} />
                 </button>
-                <button className="similar-items-next absolute -right-6 top-1/2 -translate-y-1/2 z-10 size-11 flex items-center justify-center bg-white rounded-full border border-[#E4E7EC] shadow-sm hover:bg-gray-50 cursor-pointer disabled:opacity-50">
+                <button className="similar-items-next absolute -right-6 top-1/3  z-10 size-11 flex items-center justify-center bg-white rounded-full border border-[#E4E7EC] shadow-sm hover:bg-gray-50 cursor-pointer disabled:opacity-50">
                   <ChevronRight size={24} color="#1D2939" strokeWidth={1.5} />
                 </button>
                 <Swiper

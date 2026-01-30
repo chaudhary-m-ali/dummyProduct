@@ -28,7 +28,7 @@ const Fragrances = () => {
   }, []);
 
   return (
-    <div className="px-4 md:px-8 xl:px-20 mt-10">
+    <div className="p-5 md:p-8 mt-10">
       <BreadCrumbs items={[{ label: "Fragrances" }]} />
       {error && (
         <div className="text-center text-red-500 font-semibold mt-10">

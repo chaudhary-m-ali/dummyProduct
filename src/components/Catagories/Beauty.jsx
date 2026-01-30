@@ -28,7 +28,7 @@ const Beauty = () => {
   }, []);
 
   return (
-    <div className="px-4 md:px-8 xl:px-20 mt-10">
+    <div className="p-5 md:p-10 mt-10">
       <BreadCrumbs items={[{ label: "Beauty", link: "/beauty" }]} />
       {error && (
         <div className="text-center text-red-500 font-semibold mt-10">
@@ -42,7 +42,7 @@ const Beauty = () => {
           ))}
         </div>
       ) : (
-        <div className=" grid grid-cols-1 gap-10 p-5  sm:p-10 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4">
+        <div className=" grid grid-cols-1 gap-10 p-5  md:p-10 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4">
           {product.map((product) => {
             return (
               <Link key={product.id} to={`/product/${product.id}`}>

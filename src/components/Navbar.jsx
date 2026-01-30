@@ -3,7 +3,9 @@ import Rectangle1 from "../assets/Rectangle1.svg";
 import { Handbag } from "lucide-react";
 import { Bell } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import Brand from "./pages/Brand";
+import Contact from "./pages/Contact";
+import FAQ from "./pages/FAQ";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
@@ -20,13 +22,13 @@ const Navbar = () => {
           </Link>
           <ul className="flex   items-center  gap-2 md:gap-12.5">
             <li className=" text-[10px] sm:text-[16px] font-medium text-[#1D364D] hidden sm:block">
-              Brand
+              <Link to="/brand">Brand</Link>
             </li>
             <li className=" text-[10px] sm:text-[16px] font-medium text-[#1D364D] hidden sm:block">
-              Contact
+              <Link to="/contact">Contact</Link>
             </li>
             <li className=" text-[10px] sm:text-[16px] font-medium text-[#1D364D] hidden sm:block">
-              FAQ’s
+              <Link to="/faq">FAQ's</Link>
             </li>
           </ul>
         </div>
