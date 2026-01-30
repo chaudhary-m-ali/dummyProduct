@@ -42,6 +42,7 @@ import { addToCart } from "@/redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import StarRating from "./StarRating";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 const ProductDetail = () => {
   const dispatch = useDispatch();
   // const { items, tempItems, totalPrice } = useSelector((state) => state.cart);
@@ -113,61 +114,72 @@ const ProductDetail = () => {
               src={product.images}
               alt="product.title"
             />
-            <Swiper
-              // install Swiper modules
-              modules={[Navigation, Pagination, Scrollbar, A11y]}
-              spaceBetween={20}
-              // slidesPerView={4}
-              navigation
-              breakpoints={{
-                0: {
-                  slidesPerView: 2, // mobile
-                },
-                640: {
-                  slidesPerView: 3, // tablets
-                },
-                1024: {
-                  slidesPerView: 4, // desktop
-                },
-              }}
-              // pagination={{ clickable: true }}
-              // scrollbar={{ draggable: true }}
-              // onSwiper={(swiper) => console.log(swiper)}
-              // onSlideChange={() => console.log("slide change")}
-              className="   sm:w-100 xl:w-150 mt-4"
-            >
-              <SwiperSlide>
-                {" "}
-                <img
-                  className="xl:size-30 rounded-[14px]"
-                  src={product.images}
-                  alt=""
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img className="xl:size-30" src={product.images} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                {" "}
-                <img className="xl:size-30" src={product.images} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                {" "}
-                <img className="xl:size-30" src={product.images} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                {" "}
-                <img className="xl:size-30" src={product.images} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                {" "}
-                <img className="xl:size-30" src={product.images} alt="" />
-              </SwiperSlide>
-              <SwiperSlide>
-                {" "}
-                <img className="xl:size-30" src={product.images} alt="" />
-              </SwiperSlide>
-            </Swiper>
+            <div className="relative group sm:w-100 xl:w-150 mt-4">
+              <button className="product-gallery-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full z-10 p-2 hover:opacity-75 cursor-pointer hidden md:block [&.swiper-button-disabled]:opacity-50 [&.swiper-button-disabled]:pointer-events-none transition-opacity duration-300">
+                <ChevronLeft size={40} strokeWidth={1.5} color="#000" />
+              </button>
+              <button className="product-gallery-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-full z-10 p-2 hover:opacity-75 cursor-pointer hidden md:block [&.swiper-button-disabled]:opacity-50 [&.swiper-button-disabled]:pointer-events-none transition-opacity duration-300">
+                <ChevronRight size={40} strokeWidth={1.5} color="#000" />
+              </button>
+              <Swiper
+                // install Swiper modules
+                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                spaceBetween={20}
+                // slidesPerView={4}
+                navigation={{
+                  nextEl: ".product-gallery-next",
+                  prevEl: ".product-gallery-prev",
+                }}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 2, // mobile
+                  },
+                  640: {
+                    slidesPerView: 3, // tablets
+                  },
+                  1024: {
+                    slidesPerView: 4, // desktop
+                  },
+                }}
+                // pagination={{ clickable: true }}
+                // scrollbar={{ draggable: true }}
+                // onSwiper={(swiper) => console.log(swiper)}
+                // onSlideChange={() => console.log("slide change")}
+                className="w-full"
+              >
+                <SwiperSlide>
+                  {" "}
+                  <img
+                    className="xl:size-30 rounded-[14px]"
+                    src={product.images}
+                    alt=""
+                  />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img className="xl:size-30" src={product.images} alt="" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <img className="xl:size-30" src={product.images} alt="" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <img className="xl:size-30" src={product.images} alt="" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <img className="xl:size-30" src={product.images} alt="" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <img className="xl:size-30" src={product.images} alt="" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <img className="xl:size-30" src={product.images} alt="" />
+                </SwiperSlide>
+              </Swiper>
+            </div>
           </div>
           <div className="right-container flex flex-col   xl:w-150">
             <div className="mt-10">
@@ -631,13 +643,22 @@ const ProductDetail = () => {
               <h4 className="text-center  sm:text-[30px] font-bold text-[#344054]">
                 Similar Items You Might Also Like
               </h4>
-              <div>
+              <div className="relative group w-75 sm:w-140 md:w-180 min-[820px]:w-200 lg:w-230 xl:w-7xl mt-4 mx-auto flex justify-center items-center">
+                <button className="similar-items-desc-prev absolute -left-6 top-1/2 -translate-y-1/2 z-10 size-11 flex items-center justify-center bg-white rounded-full border border-[#E4E7EC] shadow-sm hover:bg-gray-50 cursor-pointer disabled:opacity-50">
+                  <ChevronLeft size={24} color="#1D2939" strokeWidth={1.5} />
+                </button>
+                <button className="similar-items-desc-next absolute -right-6 top-1/2 -translate-y-1/2 z-10 size-11 flex items-center justify-center bg-white rounded-full border border-[#E4E7EC] shadow-sm hover:bg-gray-50 cursor-pointer disabled:opacity-50">
+                  <ChevronRight size={24} color="#1D2939" strokeWidth={1.5} />
+                </button>
                 <Swiper
                   // install Swiper modules
                   modules={[Navigation, Pagination, Scrollbar, A11y]}
                   spaceBetween={20}
-                  // slidesPerView={4}r
-                  navigation
+                  // slidesPerView={4}
+                  navigation={{
+                    nextEl: ".similar-items-desc-next",
+                    prevEl: ".similar-items-desc-prev",
+                  }}
                   breakpoints={{
                     0: {
                       slidesPerView: 1, // mobile
@@ -654,13 +675,13 @@ const ProductDetail = () => {
                   }}
                   // pagination={{ clickable: true }}
                   // scrollbar={{ draggable: true }}
-                  onSwiper={(swiper) => console.log(swiper)}
-                  onSlideChange={() => console.log("slide change")}
-                  className=" w-75 sm:w-140 md:w-180 min-[820px]:w-200 lg:w-230  xl:w-7xl mt-4 flex justify-center items-center "
+                  // onSwiper={(swiper) => console.log(swiper)}
+                  // onSlideChange={() => console.log("slide change")}
+                  className="w-full"
                 >
                   {similarProducts.map((item, id) => {
                     return (
-                      <SwiperSlide>
+                      <SwiperSlide key={id}>
                         <Link to={`/product/${item.id}`}>
                           <Card key={id} product={item} />
                         </Link>
@@ -786,45 +807,56 @@ const ProductDetail = () => {
             </div>
             <ReviewForm />
             <div>
-              <h4 className="text-center  sm:text-[30px] font-bold text-[#344054]">
+              <h4 className="text-left text-[24px] sm:text-[30px] font-bold text-[#1D2939] mb-6">
                 Similar Items You Might Also Like
               </h4>
-              <Swiper
-                // install Swiper modules
-                modules={[Navigation, Pagination, Scrollbar, A11y]}
-                spaceBetween={20}
-                // slidesPerView={4}
-                navigation
-                breakpoints={{
-                  0: {
-                    slidesPerView: 1, // mobile
-                  },
-                  640: {
-                    slidesPerView: 2, // tablets
-                  },
-                  1024: {
-                    slidesPerView: 3, // desktop
-                  },
-                  1280: {
-                    slidesPerView: 4,
-                  },
-                }}
-                // pagination={{ clickable: true }}
-                // scrollbar={{ draggable: true }}
-                // onSwiper={(swiper) => console.log(swiper)}
-                // onSlideChange={() => console.log("slide change")}
-                className=" w-75 sm:w-140 md:w-180 min-[820px]:w-200 lg:w-230  xl:w-7xl mt-4 flex justify-center items-center "
-              >
-                {similarProducts.map((item, id) => {
-                  return (
-                    <SwiperSlide>
-                      <Link to={`/product/${item.id}`}>
-                        <Card key={id} product={item} />
-                      </Link>
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
+              <div className="relative group w-75 sm:w-140 md:w-180 min-[820px]:w-200 lg:w-230 xl:w-7xl mt-4 mx-auto flex justify-center items-center">
+                <button className="similar-items-prev absolute -left-6 top-1/2 -translate-y-1/2 z-10 size-11 flex items-center justify-center bg-white rounded-full border border-[#E4E7EC] shadow-sm hover:bg-gray-50 cursor-pointer disabled:opacity-50">
+                  <ChevronLeft size={24} color="#1D2939" strokeWidth={1.5} />
+                </button>
+                <button className="similar-items-next absolute -right-6 top-1/2 -translate-y-1/2 z-10 size-11 flex items-center justify-center bg-white rounded-full border border-[#E4E7EC] shadow-sm hover:bg-gray-50 cursor-pointer disabled:opacity-50">
+                  <ChevronRight size={24} color="#1D2939" strokeWidth={1.5} />
+                </button>
+                <Swiper
+                  // install Swiper modules
+                  modules={[Navigation, Pagination, Scrollbar, A11y]}
+                  spaceBetween={20}
+                  // slidesPerView={4}
+                  navigation={{
+                    nextEl: ".similar-items-next",
+                    prevEl: ".similar-items-prev",
+                  }}
+                  breakpoints={{
+                    0: {
+                      slidesPerView: 1, // mobile
+                    },
+                    640: {
+                      slidesPerView: 2, // tablets
+                    },
+                    1024: {
+                      slidesPerView: 3, // desktop
+                    },
+                    1280: {
+                      slidesPerView: 4,
+                    },
+                  }}
+                  // pagination={{ clickable: true }}
+                  // scrollbar={{ draggable: true }}
+                  // onSwiper={(swiper) => console.log(swiper)}
+                  // onSlideChange={() => console.log("slide change")}
+                  className="w-full"
+                >
+                  {similarProducts.map((item, id) => {
+                    return (
+                      <SwiperSlide key={id}>
+                        <Link to={`/product/${item.id}`}>
+                          <Card key={id} product={item} />
+                        </Link>
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+              </div>
             </div>
           </div>
         </div>
