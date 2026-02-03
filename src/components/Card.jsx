@@ -2,11 +2,11 @@ import React from "react";
 import frame_10 from "../assets/frame10.svg";
 import { Heart } from "lucide-react";
 import StarRating from "./StarRating";
-const Card = ({ product, id }) => {
+const Card = ({ product, id, showActionButtons = true }) => {
   return (
     <div
       key={id}
-      className="rounded-[18.48px] border-2 border-[#F7F5F7] grid gap-3  max-[350px]:w-[70] sm:w-full  "
+      className="rounded-[18px] border-2 border-[#F7F5F7] grid gap-3  max-[350px]:w-[70] sm:w-full  "
     >
       <div className="relative">
         <img
@@ -35,14 +35,16 @@ const Card = ({ product, id }) => {
           <StarRating rating={product.rating} size={16} showRating={false} />
           <p className="text-[#98A2B3]">({product.rating})</p>
         </div>
-        <div className="flex justify-between mt-3">
-          <button className="bg-[#3A4980] text-white rounded-[50px] text-sm font-semibold px-2 py-1 w-32 cursor-pointer">
-            Add To Cart
-          </button>
-          <button className="text-[#344054] rounded-[50px] text-sm font-semibold border border-[#D0D5DD] px-2 py-1 w-32 cursor-pointer ">
-            Add Shortlist
-          </button>
-        </div>
+        {showActionButtons && (
+          <div className="flex justify-between mt-3">
+            <button className="bg-[#3A4980] text-white rounded-[50px] text-sm font-semibold px-2 py-1 w-32 cursor-pointer">
+              Add To Cart
+            </button>
+            <button className="text-[#344054] rounded-[50px] text-sm font-semibold border border-[#D0D5DD] px-2 py-1 w-32 cursor-pointer ">
+              Add Shortlist
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

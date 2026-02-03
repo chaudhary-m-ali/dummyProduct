@@ -548,7 +548,7 @@ const ProductDetail = () => {
               <h4 className="text-[#344054] text-[24px] font-bold">
                 Product Description
               </h4>
-              <p className="text-[#667085] font-normal text-[16px]  sm:w-full">
+              <p className="text-[#667085] font-normal text-[16px]  sm:w-[80%]">
                 When it's colder than the far side of the moon and spitting rain
                 too, you've still got to look good. From water-repellent leather
                 to a rugged outsole, the Lunar Force 1 adapts AF-1 style, so you
@@ -718,7 +718,11 @@ const ProductDetail = () => {
                     return (
                       <SwiperSlide key={id}>
                         <Link to={`/product/${item.id}`}>
-                          <Card key={id} product={item} />
+                          <Card
+                            key={id}
+                            product={item}
+                            showActionButtons={false}
+                          />
                         </Link>
                       </SwiperSlide>
                     );
