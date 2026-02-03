@@ -231,8 +231,13 @@ const ProductDetail = () => {
                 <h2 className="sm:text-[34px] text-[#3A4980] font-bold">
                   ${product.price}
                 </h2>
-                <h4 className="sm:text-[21px] text-black/50 font-normal  ">
-                  {product.discountPercentage}%
+                <h4 className="sm:text-[21px] text-black/50 font-normal line-through">
+                  {product.price && product.discountPercentage
+                    ? `$${(
+                        product.price /
+                        (1 - product.discountPercentage / 100)
+                      ).toFixed(2)}`
+                    : null}
                 </h4>
               </div>
               <div id="right" className="grid gap-2 sm:gap-4">
