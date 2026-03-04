@@ -1,5 +1,5 @@
 import React from "react";
-import frame_10 from "../assets/frame10.svg";
+
 import { Heart } from "lucide-react";
 import StarRating from "./StarRating";
 const Card = ({ product, id, showActionButtons = true }) => {
