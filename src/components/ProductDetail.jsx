@@ -97,16 +97,16 @@ const ProductDetail = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="max-w-screen-2xl mx-auto">
       {/* <Navbar /> */}
       <div className="px-4 md:px-8 xl:px-20 mt-10">
         <div
           id="product-top"
-          className="flex flex-col  lg:flex-row  lg:justify-between"
+          className="flex flex-col  lg:flex-row  lg:justify-between lg:gap-8 "
         >
           <div id="left-container" className="">
             <img
-              className="  xl:w-150 rounded-[17px] border"
+              className="xl:w-150 rounded-[17px] border"
               src={product.images}
               alt="product.title"
             />
@@ -177,7 +177,7 @@ const ProductDetail = () => {
               </Swiper>
             </div>
           </div>
-          <div className="right-container flex flex-col   xl:w-150">
+          <div className="right-container flex flex-col  xl:w-150">
             <div>
               <BreadCrumbs
                 className="bg-[#EDF0F8] px-2.25 py-1.5 rounded-[6px] "

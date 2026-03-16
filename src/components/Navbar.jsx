@@ -12,7 +12,7 @@ const Navbar = () => {
   const cartItems = useSelector((state) => state.cart?.items) || [];
   return (
     <div>
-      <div className="flex justify-between px-5 lg:px-20 py-5 items-center">
+      <div className="flex justify-between px-5 lg:px-20 py-5 items-center  max-w-screen-2xl mx-auto ">
         <div className="flex  gap-6  sm:gap-15 items-center">
           <Link
             to="/"

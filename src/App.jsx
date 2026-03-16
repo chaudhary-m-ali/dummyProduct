@@ -14,7 +14,7 @@ import Contact from "./components/pages/Contact";
 import FAQ from "./components/pages/FAQ";
 const App = () => {
   return (
-    <div className="">
+    <div className="max-screen-2xl mx-auto ">
       <Toaster position="top-center" />
       <Navbar />
       <Routes>

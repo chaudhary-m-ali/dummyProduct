@@ -54,9 +54,9 @@ const Products = () => {
   const hasNoResults =
     !error && !loading && product.length === 0 && searchQuery.trim() !== "";
   return (
-    <div>
-      <div className="flex gap-3 items-center">
-        <div className="p-5 sm:p-10 flex relative sm:w-96  ">
+    <div className="max-w-screen-2xl mx-auto">
+      <div className="flex gap-1 sm:gap-3 items-center  ">
+        <div className="p-3 sm:p-10 flex relative sm:w-96  ">
           <input
             type="search"
             placeholder="Search products..."
@@ -65,11 +65,11 @@ const Products = () => {
             className="w-full sm:w-96 px-4 pr-10 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-400    [&::-webkit-search-cancel-button]:cursor-pointer"
           />
           <Search
-            className="absolute right-10 top-7 sm:right-15 sm:top-12.5 cursor-pointer"
-            size={20}
+            className="absolute right-10 top-6.5 sm:right-15 sm:top-13.5 cursor-pointer"
+            size={16}
           />
         </div>
-        <Dropdown className="cursor-pointer " />
+        <Dropdown className="cursor-pointer mr-3 " />
       </div>
       {error && (
         <div className="text-center text-red-500 font-semibold mt-10">
